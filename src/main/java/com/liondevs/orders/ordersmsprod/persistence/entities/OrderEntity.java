@@ -1,42 +1,41 @@
 package com.liondevs.orders.ordersmsprod.persistence.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import com.liondevs.orders.ordersmsprod.enums.OrderStates;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Table(name = "order")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+
+@Document(collection = "orders")
+@Data
 public class OrderEntity {
     @Id
-    @GeneratedValue
-    @Column(unique = true, nullable = false)
-    private Long id;
+    private String id;
+    @NotNull
 
-    @Column(unique = true, nullable = false)
-    private String orderId;
+    private Long restaurantId;
 
-    @Column(nullable = false)
-    private String restaurantId;
-    @Column(nullable = false)
+    @NotNull
+    private Long userId;
+
+    @NotNull
+    private OrderStates state;
+    @NotNull
+
     private double total;
-
-    @Column(nullable = false)
+    @NotNull
     private double subtotal;
-
-    @Column(nullable = false)
+    @NotNull
     private double iva;
 
-    @Column( nullable = false)
+    @NotNull
     private List<Product> products;
 
     @CreatedDate
@@ -44,8 +43,5 @@ public class OrderEntity {
 
     @CreatedDate
     private LocalDateTime updated_at;
-
-
-
 
 }

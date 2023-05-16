@@ -10,14 +10,8 @@ spring:
     name: fast-food-app-orders
   profiles:
     active: dev
-
-  datasource:
-    url: jdbc:mysql://fast-food-auth.c1rtbhbfjwdb.us-east-1.rds.amazonaws.com/ffapp?useSSL=false
-    username: admin
-    password: Madara*20
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQLDialect
+  data:
+    mongodb:
+      uri: mongodb+srv://backend:Madara*123@cluster0.f4o6lo5.mongodb.net/ordersDb?retryWrites=true&w=majority
 server:
   port: 8071

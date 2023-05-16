@@ -1,6 +1,7 @@
 package com.liondevs.orders.ordersmsprod.mappers;
 
 import com.liondevs.orders.ordersmsprod.controller.dto.OrderDTO;
+import com.liondevs.orders.ordersmsprod.enums.OrderStates;
 import com.liondevs.orders.ordersmsprod.persistence.entities.OrderEntity;
 import com.liondevs.orders.ordersmsprod.persistence.entities.Product;
 import org.modelmapper.ModelMapper;
@@ -46,16 +47,18 @@ public class OrderDTOToOrderEntityMapper implements iMapper<OrderDTO, OrderEntit
 
     @Override
     public OrderEntity map(OrderDTO orderDTO) {
-        final String orderId = UUID.randomUUID().toString();
         Type objectType = new TypeToken<OrderEntity>() {}.getType();
         OrderEntity  returnValue = new ModelMapper().map(orderDTO, objectType);
         List<Product> products = returnValue.getProducts();
         Map<String, Double> totals = validateTotal(products);
-        returnValue.setOrderId(orderId);
+
+
+        returnValue.setId(UUID.randomUUID().toString());
         returnValue.setIva(totals.get("iva"));
         returnValue.setSubtotal(totals.get("subtotal"));
         returnValue.setTotal(totals.get("total"));
         returnValue.setProducts(evaluateProductTaxes(products));
+        returnValue.setState(OrderStates.CREATED);
         return  returnValue;
     }
 }
