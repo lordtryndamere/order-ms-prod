@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor
@@ -23,9 +25,14 @@ public class OrderControllerImpl implements OrderController {
         return orderService.create(request, userId);
     }
 
+    @GetMapping("/getBy")
+    public ResponseEntity<List<OrderEntity>> getOrders (@RequestParam Long placeId, @RequestParam Long userId) {
+        return orderService.getOrders(placeId,userId);
+    }
+
     @Override
     @GetMapping("/update")
-    public ResponseEntity<DefaultResponse> update(@RequestParam OrderStates state, @RequestParam  String id) {
+    public ResponseEntity<DefaultResponse> update (@RequestParam OrderStates state, @RequestParam String id) {
         return orderService.update(state,id);
     }
 }

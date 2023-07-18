@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Builder
-@RequiredArgsConstructor
 @Data
 public class DefaultResponse {
     private String message;

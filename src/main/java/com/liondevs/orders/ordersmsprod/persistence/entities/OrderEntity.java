@@ -19,11 +19,13 @@ public class OrderEntity {
     @Id
     private String id;
     @NotNull
-
-    private Long restaurantId;
+    private Long placeId;
 
     @NotNull
     private Long userId;
+
+    @NotNull
+    private String riderId;
 
     @NotNull
     private OrderStates state;

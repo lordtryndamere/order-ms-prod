@@ -22,7 +22,7 @@ public class KafkaProducerConfig {
 
 
     public Map<String, Object> senderProps() {
-        String bootstrapAddress = "localhost:9092";
+        String bootstrapAddress = "pkc-p11xm.us-east-1.aws.confluent.cloud:9092";
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);

@@ -51,9 +51,9 @@ public class OrderDTOToOrderEntityMapper implements iMapper<OrderDTO, OrderEntit
         OrderEntity  returnValue = new ModelMapper().map(orderDTO, objectType);
         List<Product> products = returnValue.getProducts();
         Map<String, Double> totals = validateTotal(products);
-
-
         returnValue.setId(UUID.randomUUID().toString());
+        returnValue.setPlaceId(orderDTO.getPlaceId());
+        returnValue.setRiderId(orderDTO.getRiderId());
         returnValue.setIva(totals.get("iva"));
         returnValue.setSubtotal(totals.get("subtotal"));
         returnValue.setTotal(totals.get("total"));
